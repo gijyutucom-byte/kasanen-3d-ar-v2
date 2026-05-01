@@ -1,6 +1,6 @@
 # kasanen-3d-ar
 3DモデルARビュワー
-# 3D AR ビュワー「かさねん3D AR」
+# 「かさねん3D AR」
 
 **STL・GLB形式の3DモデルをAR（拡張現実）で表示するWebアプリケーションです。**  
 **Keywords:** STL, GLB, AR, 3D Viewer, Three.js, STEAM Education, Digital Fabrication
