@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>3D AR Viewer Mura-lab.info</title>
+  <link rel="stylesheet" href="style.css" />
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.150.0/build/three.module.js"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- スタート画面 -->
+  <div id="startOverlay">
+    <img src="botton.png" alt="3DモデルARのビューア" id="startImage" />
+  </div>
+
+  <!-- モデル操作ボタン -->
+  <div id="modelControls" style="display: none;">
+    <button id="btnLoadModel">モデル読み込み</button>
+    <input type="file" id="modelInput" accept=".stl,.glb,.gltf" style="display:none" />
+  </div>
+
+  <!-- ドロップゾーン -->
+  <div id="dropZone" style="display: none;">ここにモデルファイルをドロップ</div>
+
+  <!-- 背景設定・操作ボタン群 -->
+  <div id="bgControls" style="display:none;">
+    <button id="btnCapture"      class="btn-accent"  style="display:none;">📷 キャプチャ</button>
+    <button id="btnImage"        class="btn-default">🖼 静止画背景</button>
+    <button id="btnCamera"       class="btn-default">📹 カメラ背景</button>
+    <button id="btnSwitchCamera" class="btn-orange"  style="display:none;">🔄 カメラ切替</button>
+    <button id="btnReloadModel"  class="btn-default">↩ 再読み込み</button>
+    <button id="btnBackAR"       class="btn-default" style="display:none;">✕ 背景リセット</button>
+    <input type="file" id="fileInput" accept="image/*" style="display:none" />
+    <button id="btnToggleWire"   class="btn-default">⬡ ポリゴン表示</button>
+    <button id="btnShowStats"    class="btn-default">📊 統計情報</button>
+    <button id="btnColorParts"   class="btn-color"   style="display:none;">🎨 STL部品区別</button>
+  </div>
+
+  <!-- 統計パネル: bgControls の外・body直下に配置 → flexの影響を受けない -->
+  <div id="statsPanel"></div>
+
+  <!-- ビデオ・カンバス -->
+  <video id="video" autoplay muted playsinline style="display:none;"></video>
+  <canvas id="arCanvas"></canvas>
+
+  <script type="module" src="main.js"></script>
+
+  <script>
+    const startOverlay = document.getElementById('startOverlay');
+    const startImage   = document.getElementById('startImage');
+    startImage.addEventListener('click', () => {
+      startOverlay.style.display = 'none';
+      document.getElementById('modelControls').style.display = 'block';
+      document.getElementById('dropZone').style.display = 'flex';
+    });
+  </script>
+</body>
+</html>
